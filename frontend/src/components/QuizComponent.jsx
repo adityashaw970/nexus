@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const quiz = [
   { question: "What is the capital of France?", answer: "Paris" },
@@ -15,12 +15,18 @@ const QuizComponent = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [score, setScore] = useState(0);
 
-  // Load data on mount
   useEffect(() => {
     const savedAnswers = JSON.parse(localStorage.getItem("quiz_answers"));
     const savedIndex = parseInt(localStorage.getItem("quiz_index"));
     const submitted = localStorage.getItem("quiz_submitted") === "true";
     const questionStartTime = localStorage.getItem("quiz_question_start");
+
+    // 🧹 Clear old answers if quiz length changed
+    if (savedAnswers && savedAnswers.length !== quiz.length) {
+      localStorage.clear();
+      window.location.reload();
+      return;
+    }
 
     if (submitted) {
       setIsSubmitted(true);
@@ -41,12 +47,11 @@ const QuizComponent = () => {
       const remaining = 30 - elapsed;
       setTimeLeft(remaining > 0 ? remaining : 0);
     } else {
-      localStorage.setItem("quiz_question_start", Date.now());
+      localStorage.setItem("quiz_question_start", Date.now().toString());
       setTimeLeft(30);
     }
   }, []);
 
-  // Timer
   useEffect(() => {
     if (isSubmitted || timeLeft <= 0) return;
 
@@ -55,38 +60,15 @@ const QuizComponent = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isSubmitted]);
+  }, [isSubmitted, timeLeft]);
 
-  // Auto next or submit
-  useEffect(() => {
-    if (isSubmitted) return;
-
-    if (timeLeft === 0) {
-      if (currentIndex < quiz.length - 1) {
-        const nextIndex = currentIndex + 1;
-        setCurrentIndex(nextIndex);
-        localStorage.setItem("quiz_index", nextIndex);
-        localStorage.setItem("quiz_question_start", Date.now());
-        setTimeLeft(30);
-      } else {
-        handleSubmit();
-      }
-    }
-  }, [timeLeft]);
-
-  // Handle answer change
-  const handleAnswerChange = (e) => {
-    const newAnswers = [...userAnswers];
-    newAnswers[currentIndex] = e.target.value;
-    setUserAnswers(newAnswers);
-    localStorage.setItem("quiz_answers", JSON.stringify(newAnswers));
-  };
-
-  // Calculate score
   const calculateScore = (answers) => {
     let score = 0;
     answers.forEach((ans, i) => {
       if (
+        i < quiz.length &&
+        quiz[i] &&
+        typeof ans === "string" &&
         ans.trim().toLowerCase() === quiz[i].answer.trim().toLowerCase()
       ) {
         score += 1;
@@ -95,8 +77,7 @@ const QuizComponent = () => {
     return score;
   };
 
-  // Submit quiz
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     const finalScore = calculateScore(userAnswers);
     setIsSubmitted(true);
     setScore(finalScore);
@@ -107,9 +88,29 @@ const QuizComponent = () => {
 
     alert("Quiz submitted!");
     console.log("Submitted Answers:", userAnswers);
+  }, [userAnswers]);
+
+  useEffect(() => {
+    if (isSubmitted || timeLeft > 0) return;
+
+    if (currentIndex < quiz.length - 1) {
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+      localStorage.setItem("quiz_index", nextIndex.toString());
+      localStorage.setItem("quiz_question_start", Date.now().toString());
+      setTimeLeft(30);
+    } else {
+      handleSubmit();
+    }
+  }, [timeLeft, currentIndex, isSubmitted, handleSubmit]);
+
+  const handleAnswerChange = (e) => {
+    const newAnswers = [...userAnswers];
+    newAnswers[currentIndex] = e.target.value;
+    setUserAnswers(newAnswers);
+    localStorage.setItem("quiz_answers", JSON.stringify(newAnswers));
   };
 
-  // Reset (optional)
   const handleReset = () => {
     localStorage.clear();
     window.location.reload();
@@ -120,7 +121,10 @@ const QuizComponent = () => {
       {isSubmitted ? (
         <div className="text-center text-white">
           <h1 className="text-4xl font-bold mb-4">🎉 Quiz Submitted!</h1>
-          <p className="text-2xl">Your Score: <span className="text-green-400 font-bold">{score}</span> / {quiz.length}</p>
+          <p className="text-2xl">
+            Your Score:{" "}
+            <span className="text-green-400 font-bold">{score}</span> / {quiz.length}
+          </p>
           <button
             onClick={handleReset}
             className="mt-6 px-6 py-2 bg-red-600 text-white rounded-[1vw] text-[1.5vw]"
@@ -153,7 +157,6 @@ const QuizComponent = () => {
             )}
           </div>
 
-          {/* Manual Submit on Last Question */}
           {!isSubmitted && currentIndex === quiz.length - 1 && (
             <button
               onClick={handleSubmit}
