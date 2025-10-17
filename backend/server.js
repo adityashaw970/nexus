@@ -314,8 +314,11 @@ io.on("connection", (socket) => {
   });
 });
 
+
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => console.log("✅ Connected to MongoDB Atlas"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
 
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
@@ -472,8 +475,6 @@ app.post("/start-quiz/:round", (req, res) => {
     res.status(400).json({ error: "Invalid round number" });
   }
 });
-
-console.log(process.env.PORT);
 
 // Server Start
 server.listen(process.env.PORT||5000, () => {
