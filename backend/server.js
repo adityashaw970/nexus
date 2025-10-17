@@ -363,17 +363,27 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/auth/status", (req, res) => {
-  let token = req.cookies.token;
-  if (!token) return res.json({ loggedIn: false });
+app.post("/auth/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
 
-  try {
-    let user = jwt.verify(token, JWT_SECRET);
-    res.json({ loggedIn: true, user });
-  } catch {
-    res.json({ loggedIn: false });
+  if (!user || user.password !== password) {
+    return res.status(401).json({ message: "Invalid credentials" });
   }
+
+  const token = jwt.sign({ email: user.email, id: user._id }, JWT_SECRET, {
+    expiresIn: "1d",
+  });
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: false, // set true if using https
+    sameSite: "lax", // or "none" if frontend is on different domain
+  });
+
+  res.json({ message: "Login successful" });
 });
+
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
