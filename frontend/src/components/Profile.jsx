@@ -6,7 +6,7 @@ const Profile = () => {
 
   useEffect(() => {
   const checkLoggedIn = async () => {
-    const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
+    const res = await fetch("https://nexus-22i4.onrender.com/auth/status", {
       method: "GET",
       credentials: "include" // important for sending cookies
     });
@@ -27,7 +27,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
   try {
-    const res = await fetch("http://nexus-3wfr.onrender.com/logout", {
+    const res = await fetch("https://nexus-22i4.onrender.com/logout", {
       method: "GET",
       credentials: "include", // needed to send cookies
     });
@@ -60,3 +60,4 @@ const Profile = () => {
 };
 
 export default Profile;
+
