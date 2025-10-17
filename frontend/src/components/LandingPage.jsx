@@ -40,7 +40,7 @@ export default function LandingPage() {
   useEffect(() => {
     const checkStatus = async () => {
       try {
-        const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
+        const res = await fetch("https://nexus-22i4.onrender.com/auth/status", {
           method: "GET",
           credentials: "include"
         });
@@ -59,7 +59,7 @@ export default function LandingPage() {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
+        const res = await fetch("https://nexus-22i4.onrender.com/auth/status", {
           method: "GET",
           credentials: "include"
         });
@@ -84,7 +84,7 @@ export default function LandingPage() {
     } else {
       setIsLeaderboardLoading(true);
       try {
-        const res = await fetch("http://nexus-3wfr.onrender.com/leaderboard", {
+        const res = await fetch("https://nexus-22i4.onrender.com/leaderboard", {
           method: "GET",
           credentials: "include"
         });

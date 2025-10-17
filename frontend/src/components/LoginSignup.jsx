@@ -31,7 +31,7 @@ export default function Login() {
 
   useEffect(() => {
   const checkLoggedIn = async () => {
-    const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
+    const res = await fetch("https://nexus-22i4.onrender.com/auth/status", {
       method: "GET",
       credentials: "include"
     });
@@ -53,7 +53,7 @@ export default function Login() {
   const username = loginUsernameRef.current.value.trim();
   const password = loginPasswordRef.current.value.trim();
   try {
-    const res = await fetch("http://nexus-3wfr.onrender.com/login", {
+    const res = await fetch("https://nexus-22i4.onrender.com/login", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -81,7 +81,7 @@ const handleSignUp = async (e) => {
   const email = signUpEmailRef.current.value.trim();
   const password = signUpPasswordRef.current.value.trim();
   try {
-    const res = await fetch("http://nexus-3wfr.onrender.com/register", {
+    const res = await fetch("https://nexus-22i4.onrender.com/register", {
       method: "POST",
       credentials: "include",
       headers: {
