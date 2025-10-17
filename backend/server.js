@@ -481,7 +481,11 @@ app.get("/auth/status", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+  });
   res.status(200).send("Logged out successfully");
 });
 
