@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Spline from '@splinetool/react-spline';
+import React, { useEffect, useState } from "react";
+import Spline from "@splinetool/react-spline";
 
 export default function LandingPage() {
   let rounds = [
@@ -7,13 +7,15 @@ export default function LandingPage() {
       title: "Round 1",
       start: true,
       completed: false,
-      video: "https://player.vimeo.com/progressive_redirect/playback/1059748367/rendition/720p/file.mp4?loc=external&signature=b8c299d68150ff794b0096fd199cc1e08d26d74e68e498ed91ec7d47b038f2e7&user_id=148208548#t=0.001",
+      video:
+        "https://player.vimeo.com/progressive_redirect/playback/1059748367/rendition/720p/file.mp4?loc=external&signature=b8c299d68150ff794b0096fd199cc1e08d26d74e68e498ed91ec7d47b038f2e7&user_id=148208548#t=0.001",
     },
     {
       title: "Round 2",
       start: true,
       completed: false,
-      video: "https://player.vimeo.com/progressive_redirect/playback/1059749311/rendition/1080p/file.mp4?loc=external&signature=f30d439a0c5c6d72588855ad64719cf7e7ba4bd619167e49f9eb8343face52a6&user_id=148208548#t=0.001",
+      video:
+        "https://player.vimeo.com/progressive_redirect/playback/1059749311/rendition/1080p/file.mp4?loc=external&signature=f30d439a0c5c6d72588855ad64719cf7e7ba4bd619167e49f9eb8343face52a6&user_id=148208548#t=0.001",
     },
     {
       title: "Round 3",
@@ -25,7 +27,8 @@ export default function LandingPage() {
       title: "Bonus Round",
       start: true,
       completed: false,
-      video: "https://player.vimeo.com/progressive_redirect/playback/831162360/rendition/720p/file.mp4?loc=external&signature=fe27313dcd4ea07fd5d87afd5938cd9465575663669ed4506feabf01de752392#t=0.001",
+      video:
+        "https://player.vimeo.com/progressive_redirect/playback/831162360/rendition/720p/file.mp4?loc=external&signature=fe27313dcd4ea07fd5d87afd5938cd9465575663669ed4506feabf01de752392#t=0.001",
     },
   ];
 
@@ -40,9 +43,9 @@ export default function LandingPage() {
   useEffect(() => {
     const checkStatus = async () => {
       try {
-        const res = await fetch("https://nexus-22i4.onrender.com/auth/status", {
+        const res = await fetch("https://nexus-zg5u.onrender.com/auth/status", {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
         });
         const data = await res.json();
         setIsLoggedIn(data.loggedIn);
@@ -59,15 +62,15 @@ export default function LandingPage() {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const res = await fetch("https://nexus-22i4.onrender.com/auth/status", {
+        const res = await fetch("https://nexus-zg5u.onrender.com/auth/status", {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
         });
         const msg = await res.json();
 
         if (window.location.href === "http://localhost:5173/") {
           if (msg.loggedIn) {
-            window.location.href = '/profile';
+            window.location.href = "/profile";
           }
         }
       } catch (error) {
@@ -84,11 +87,11 @@ export default function LandingPage() {
     } else {
       setIsLeaderboardLoading(true);
       try {
-        const res = await fetch("https://nexus-22i4.onrender.com/leaderboard", {
+        const res = await fetch("https://nexus-zg5u.onrender.com/leaderboard", {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
         });
-        
+
         if (res.ok) {
           const data = await res.json();
           console.log("Leaderboard data:", data); // Debug log
@@ -109,7 +112,7 @@ export default function LandingPage() {
 
   const handleRoundClick = (round, index) => {
     if (!round.start) return;
-    
+
     if (!isLoggedIn) {
       alert("Please log in to play the game.");
       window.location.href = "/login";
@@ -119,57 +122,66 @@ export default function LandingPage() {
   };
 
   const getMedalBackground = (index) => {
-    switch(index) {
+    switch (index) {
       case 0:
-        return 'bg-gradient-to-br from-orange-300 via-yellow-400 to-orange-600';
+        return "bg-gradient-to-br from-orange-300 via-yellow-400 to-orange-600";
       case 1:
-        return 'bg-gradient-to-br from-red-300 via-red-400 to-red-600';
+        return "bg-gradient-to-br from-red-300 via-red-400 to-red-600";
       case 2:
-        return 'bg-gradient-to-br from-green-400 via-green-400 to-green-600';
+        return "bg-gradient-to-br from-green-400 via-green-400 to-green-600";
       default:
-        return 'bg-white/40';
+        return "bg-white/40";
     }
   };
 
   const getMedalTextColor = (index) => {
-    return index < 3 ? 'text-white' : 'text-black/80';
+    return index < 3 ? "text-white" : "text-black/80";
   };
 
   return (
     <>
       <div className="w-full overflow-hidden h-screen bg-gray-800 font-[Game_of_Squids] relative">
-        
-        <video src="/landing.mp4" autoPlay loop muted className='h-screen w-full object-cover'></video>
+        <video
+          src="/landing.mp4"
+          autoPlay
+          loop
+          muted
+          className="h-screen w-full object-cover"
+        ></video>
         <div className="absolute lg:top-[0vw] lg:left-[5vw] z-10 top-[10vw] left-[2vw]">
-
           <img
             src="https://www.radionitroz.in/assets/rnlogo-BNXsDXYE.png"
             alt=""
-            className="h-30 lg:h-[8vw] w-auto object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-300"/>
+            className="h-30 lg:h-[8vw] w-auto object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-300"
+          />
         </div>
         {/*Prasanna Greyish-white Squid Game style title */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-0">
-        <h1
-          className="text-[20vw] sm:text-[14vw] md:text-[5vw] lg:text-[7vw] font-bold uppercase lg:tracking-tight leading-[18vw]
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-0">
+          <h1
+            className="text-[20vw] sm:text-[14vw] md:text-[5vw] lg:text-[7vw] font-bold uppercase lg:tracking-tight leading-[18vw]
           font-['Game_of_Squids'] text-gray-200 animate-glowPulse"
-        >
-          Nexus Verse
-        </h1>
-      </div>
+          >
+            Nexus Verse
+          </h1>
+        </div>
 
-      <div className="overflow-hidden">
-        <div className='flex flex-col lg:flex-row lg:justify-between lg:px-[5vw] top-[75%] lg:top-[70%] absolute items-center w-full  z-10 space-y-[2vh] lg:space-y-0'>
+        <div className="overflow-hidden">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:px-[5vw] top-[75%] lg:top-[70%] absolute items-center w-full  z-10 space-y-[2vh] lg:space-y-0">
             {/* Leaderboard Button */}
-            <div 
-              onClick={handleToggleLeaderboard} 
-              className={`lg:rounded-[4vw] rounded-[4vh] overflow-hidden lg:h-[10vw] h-[8vh] w-[40vh] lg:w-[10vw] cursor-pointer relative  hover:scale-105 transition-transform ${showLeaderboard?"opacity-0":"opacity-100"}`}
+            <div
+              onClick={handleToggleLeaderboard}
+              className={`lg:rounded-[4vw] rounded-[4vh] overflow-hidden lg:h-[10vw] h-[8vh] w-[40vh] lg:w-[10vw] cursor-pointer relative  hover:scale-105 transition-transform ${
+                showLeaderboard ? "opacity-0" : "opacity-100"
+              }`}
             >
-              <h1 className='absolute lg:hidden text-white uppercase text-[3.5vh] font-bold flex justify-center items-center w-full h-full'>Leaderboard</h1>
-              <video 
-                className='object-cover object-[50%_0%] w-full h-full' 
-                src="./trophy.mp4" 
-                autoPlay 
-                muted 
+              <h1 className="absolute lg:hidden text-white uppercase text-[3.5vh] font-bold flex justify-center items-center w-full h-full">
+                Leaderboard
+              </h1>
+              <video
+                className="object-cover object-[50%_0%] w-full h-full"
+                src="./trophy.mp4"
+                autoPlay
+                muted
                 loop
               />
               {isLeaderboardLoading && (
@@ -180,8 +192,8 @@ export default function LandingPage() {
             </div>
 
             {/* Play Button */}
-            <div 
-              className='relative flex lg:w-[25vw] justify-center group items-center cursor-pointer' 
+            <div
+              className="relative flex lg:w-[25vw] justify-center group items-center cursor-pointer"
               onClick={() => setIsPanelOpen(true)}
             >
               {/* Play Circle Slide In */}
@@ -193,7 +205,9 @@ export default function LandingPage() {
 
               {/* Video Box */}
               <div className="relative lg:w-[25vw] lg:h-[11vw] h-[11vh] w-[40vh] group overflow-hidden rounded-[2vh_2vh] lg:rounded-[2vh_0vh] [clip-path:polygon(10%_0%,90%_0%,100%_100%,0%_100%)] lg:[clip-path:polygon(10%_0%,100%_0%,100%_100%,0%_100%)] bg-gray-900 flex justify-center items-center">
-                <span className='uppercase absolute font-bold text-white lg:text-[7vw] text-[8vh] tracking-[1vh] z-10'>Play</span>
+                <span className="uppercase absolute font-bold text-white lg:text-[7vw] text-[8vh] tracking-[1vh] z-10">
+                  Play
+                </span>
                 <video
                   className="w-full h-full object-cover"
                   src="https://player.vimeo.com/progressive_redirect/playback/1059748367/rendition/540p/file.mp4?loc=external&signature=ca5778ce895677c3e8c7df60a1a1bb046009392baecae686c2d2a9217621e43a&user_id=148208548"
@@ -215,7 +229,9 @@ export default function LandingPage() {
             {/* Close Button */}
             <button
               onClick={() => setIsPanelOpen(false)}
-              className={`${isPanelOpen ? "block" : "hidden"} absolute top-[50%] lg:left-[-5%] left-[-12%] lg:text-[2vw] text-[3vh] font-bold bg-[#f10593d9] text-white lg:w-[5vw] lg:h-[5vw] h-[10vh] w-[10vh] flex items-center justify-center rounded-full hover:animate-spin z-20`}
+              className={`${
+                isPanelOpen ? "block" : "hidden"
+              } absolute top-[50%] lg:left-[-5%] left-[-12%] lg:text-[2vw] text-[3vh] font-bold bg-[#f10593d9] text-white lg:w-[5vw] lg:h-[5vw] h-[10vh] w-[10vh] flex items-center justify-center rounded-full hover:animate-spin z-20`}
             >
               ✕
             </button>
@@ -228,18 +244,28 @@ export default function LandingPage() {
                     <h2 className="text-black  text-[3vh] lg:text-[4vw] font-bold uppercase lg:tracking-tighter font-[GilM]">
                       {round.title}
                     </h2>
-                    <span className="text-[3vh] lg:text-[4vw] font-extrabold">#{index + 1}</span>
+                    <span className="text-[3vh] lg:text-[4vw] font-extrabold">
+                      #{index + 1}
+                    </span>
                   </div>
                   <div className="rounded-[2vw] relative overflow-hidden w-full lg:h-[25vw] h-[25vh] flex justify-center items-center bg-gray-900">
-                    <span 
+                    <span
                       onClick={() => handleRoundClick(round, index)}
                       className={`uppercase absolute font-bold cursor-pointer font-[GilM] ${
                         round.start ? "text-white" : "text-black"
-                      } ${round.start ? "text-[10vh] lg:text-[7vw]" : "text-[5vh] lg:text-[5vw]"} tracking-tight z-10 w-full h-full flex justify-center items-center ${
+                      } ${
+                        round.start
+                          ? "text-[10vh] lg:text-[7vw]"
+                          : "text-[5vh] lg:text-[5vw]"
+                      } tracking-tight z-10 w-full h-full flex justify-center items-center ${
                         round.start ? "opacity-100" : "opacity-50 bg-gray-100"
                       }`}
                     >
-                      {round.start ? round.completed ? "Completed": "Play" : "Coming soon"}
+                      {round.start
+                        ? round.completed
+                          ? "Completed"
+                          : "Play"
+                        : "Coming soon"}
                     </span>
 
                     <video
@@ -256,7 +282,7 @@ export default function LandingPage() {
           </div>
 
           {/* Leaderboard Sliding Panel */}
-          
+
           <div
             className={`font-[GilM] fixed top-0 left-0 h-full w-[40vh] lg:w-[35vw] bg-white/20  z-50 transform transition-transform duration-500 ${
               showLeaderboard ? "translate-x-0" : "-translate-x-full"
@@ -274,12 +300,12 @@ export default function LandingPage() {
 
             {/* Leaderboard Header */}
             <div className="w-full flex flex-col items-center text-white my-[5vh] lg:my-[2vw]">
-              <div className='lg:rounded-[4vw] rounded-full overflow-hidden lg:h-[10vw] h-[20vh] w-[20vh] lg:w-[10vw] cursor-pointer relative'>
-                <video 
-                  className='object-cover w-full h-full' 
-                  src="./trophy.mp4" 
-                  autoPlay 
-                  muted 
+              <div className="lg:rounded-[4vw] rounded-full overflow-hidden lg:h-[10vw] h-[20vh] w-[20vh] lg:w-[10vw] cursor-pointer relative">
+                <video
+                  className="object-cover w-full h-full"
+                  src="./trophy.mp4"
+                  autoPlay
+                  muted
                   loop
                 />
               </div>
@@ -296,18 +322,21 @@ export default function LandingPage() {
                     {isLeaderboardLoading ? "Loading..." : "No entries yet"}
                   </li>
                 ) : (
-                  <div className='lg:space-y-[.7vw] space-y-[1vh] overflow-hidden'>
+                  <div className="lg:space-y-[.7vw] space-y-[1vh] overflow-hidden">
                     {leaderboard.map((entry, idx) => (
                       <li
                         key={entry._id}
-                        className=
-                        {`text-[2vh] lg:text-[1.7vw] uppercase font-medium flex justify-between items-center ${getMedalBackground(idx)} ${getMedalTextColor(idx)} rounded-[1vw] px-[1vh] py-[2vh] lg:px-[1.3vw] lg:py-[1vw] relative`}
+                        className={`text-[2vh] lg:text-[1.7vw] uppercase font-medium flex justify-between items-center ${getMedalBackground(
+                          idx
+                        )} ${getMedalTextColor(
+                          idx
+                        )} rounded-[1vw] px-[1vh] py-[2vh] lg:px-[1.3vw] lg:py-[1vw] relative`}
                       >
                         <span className=" font-bold">#{idx + 1}</span>
-                          <span className="truncate font-semibold max-w-[15vw]">
-                            {entry.userId?.username || "Unknown User"}
-                          </span>
-                          <span className=" font-bold">
+                        <span className="truncate font-semibold max-w-[15vw]">
+                          {entry.userId?.username || "Unknown User"}
+                        </span>
+                        <span className=" font-bold">
                           {entry.totalScore || 0}
                         </span>
                       </li>
