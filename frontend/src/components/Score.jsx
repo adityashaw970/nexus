@@ -12,7 +12,7 @@ const Score = () => {
     const checkAuthAndLoadData = async () => {
       try {
         // Check if user is logged in
-        const res = await fetch("https://nexus-zg5u.onrender.com/auth/status", {
+        const res = await fetch("https://nexus-zg5u.onrender.comauth/status", {
           method: "GET",
           credentials: "include",
         });
@@ -51,7 +51,7 @@ const Score = () => {
   const fetchRoundData = async (round) => {
     try {
       const response = await fetch(
-        `https://nexus-zg5u.onrender.com/get-user-score?round=${round}`,
+        `https://nexus-zg5u.onrender.comget-user-score?round=${round}`,
         {
           method: "GET",
           credentials: "include",
@@ -91,7 +91,7 @@ const Score = () => {
   const fetchTotalData = async () => {
     try {
       const response = await fetch(
-        "https://nexus-zg5u.onrender.com/get-user-score",
+        "https://nexus-zg5u.onrender.comget-user-score",
         {
           method: "GET",
           credentials: "include",
@@ -123,7 +123,7 @@ const Score = () => {
 
       for (const round of rounds) {
         const response = await fetch(
-          `https://nexus-zg5u.onrender.com/get-user-score?round=${round}`,
+          `https://nexus-zg5u.onrender.comget-user-score?round=${round}`,
           {
             method: "GET",
             credentials: "include",

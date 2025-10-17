@@ -31,7 +31,7 @@ export default function Login() {
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      const res = await fetch("https://nexus-zg5u.onrender.com/auth/status", {
+      const res = await fetch("https://nexus-zg5u.onrender.comauth/status", {
         method: "GET",
         credentials: "include",
       });
@@ -52,7 +52,7 @@ export default function Login() {
     const username = loginUsernameRef.current.value.trim();
     const password = loginPasswordRef.current.value.trim();
     try {
-      const res = await fetch("https://nexus-zg5u.onrender.com/login", {
+      const res = await fetch("https://nexus-zg5u.onrender.comlogin", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -79,7 +79,7 @@ export default function Login() {
     const email = signUpEmailRef.current.value.trim();
     const password = signUpPasswordRef.current.value.trim();
     try {
-      const res = await fetch("https://nexus-zg5u.onrender.com/register", {
+      const res = await fetch("https://nexus-zg5u.onrender.comregister", {
         method: "POST",
         credentials: "include",
         headers: {

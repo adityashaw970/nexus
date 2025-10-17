@@ -6,7 +6,7 @@ const Profile = () => {
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      const res = await fetch("https://nexus-zg5u.onrender.com/auth/status", {
+      const res = await fetch("https://nexus-zg5u.onrender.comauth/status", {
         method: "GET",
         credentials: "include", // important for sending cookies
       });
@@ -26,20 +26,19 @@ const Profile = () => {
   }, []);
 
   const handleLogout = async () => {
-  try {
-    const res = await fetch("https://nexus-zg5u.onrender.com/logout", {
-      method: "GET",
-      credentials: "include", // needed to send cookies
-    });
-    const msg = await res.text();
-    alert(msg);
-    localStorage.clear();  // ✅ Clear localStorage
-    window.location.href = "/"; 
-  } catch (err) {
-    console.error("Error logging out:", err);
-  }
+    try {
+      const res = await fetch("https://nexus-zg5u.onrender.comlogout", {
+        method: "GET",
+        credentials: "include", // needed to send cookies
+      });
+      const msg = await res.text();
+      alert(msg);
+      localStorage.clear(); // ✅ Clear localStorage
+      window.location.href = "/";
+    } catch (err) {
+      console.error("Error logging out:", err);
+    }
   };
-
 
   return (
     <div className="w-full h-screen relative overflow-hidden">
