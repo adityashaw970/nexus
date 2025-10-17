@@ -327,7 +327,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 mongoose.set('debug', true);
  
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin:true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -344,7 +344,7 @@ app.post("/register", async (req, res) => {
     let user = await userModel.create({ username, email, password: hashedPassword });
     let token = jwt.sign({ email: user.email, id: user._id, username: user.username }, JWT_SECRET);
 
-    res.cookie("token", token, { httpOnly: true, sameSite: "Lax" });
+    res.cookie("token", token, { httpOnly: true, sameSite: "none" });
     res.send("Registered successfully");
   } catch (err) {
     console.error("Registration error:", err);
@@ -362,7 +362,7 @@ app.post("/login", async (req, res) => {
     if (!isMatch) return res.status(401).send("Incorrect password");
 
     let token = jwt.sign({ email: user.email, id: user._id, username: user.username }, JWT_SECRET);
-    res.cookie("token", token, { httpOnly: true, sameSite: "Lax" });
+    res.cookie("token", token, { httpOnly: true, sameSite: "none" });
     res.status(200).send("Login successful");
   } catch (err) {
     console.error("Login error:", err);
@@ -394,7 +394,7 @@ app.get("/leaderboard", async (req, res) => {
       .find()
       .sort({ totalScore: -1, createdAt: 1 })
       .populate("userId", "username email")
-      .limit(10);
+      .limit(100);
 
     res.json(results);
   } catch (err) {
