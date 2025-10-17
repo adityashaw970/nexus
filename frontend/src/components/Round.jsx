@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import io from "socket.io-client";
-import Spline from "@splinetool/react-spline";
 
 // Initialize socket connection
 const socket = io("https://nexus-22i4.onrender.com", { withCredentials: true });
