@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin:true,
+    origin: true,
     credentials: true,
   },
 });
@@ -32,31 +32,102 @@ const QUIZ_CONFIG = {
     name: "Round 1",
     scoreMultiplier: 1,
     questionTime: 10000, // 10 seconds
-    startTime: "43 13 * * *", 
+    startTime: "43 13 * * *",
     questions: [
-      { day: "Day 1", round: "Round 1", set: 1, question: "They work with various types of fabrics and garments, including suits, dresses, shirts, trousers, and more. They use sewing machines. By profession, who are they?", answer: "Tailor" },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 1,
+        question:
+          "They work with various types of fabrics and garments, including suits, dresses, shirts, trousers, and more. They use sewing machines. By profession, who are they?",
+        answer: "Tailor",
+      },
       { day: "Day 1", round: "Round 1", set: 1, question: "5+5", answer: "10" },
-      { day: "Day 1", round: "Round 1", set: 1, question: "This car was first introduced in India in 2005...What is the car's name?", answer: "Swift" },
-      { day: "Day 1", round: "Round 1", set: 1, question: "This area typically refers to the concept of space... What is the area?", answer: "Blank Space" },
-      { day: "Day 1", round: "Round 1", set: 1, question: "American singer-songwriter known for her country and pop music. Born in 1989... Who is she?", answer: "Taylor Swift" },
-      { day: "Day 1", round: "Round 1", set: 2, question: "A male member of a royal family...", answer: "Prince" },
-      { day: "Day 1", round: "Round 1", set: 2, question: "A complex psychological state involving feelings...", answer: "Emotion" },
-      { day: "Day 1", round: "Round 1", set: 2, question: "An Indian actor who made his debut in 'Rocky' in 1981...", answer: "Sanjay Dutt" },
-      { day: "Day 1", round: "Round 1", set: 2, question: "A long-legged freshwater or coastal bird...", answer: "Heron" },
-      { day: "Day 1", round: "Round 1", set: 2, question: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", answer: "Director" },
-    ]
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 1,
+        question:
+          "This car was first introduced in India in 2005...What is the car's name?",
+        answer: "Swift",
+      },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 1,
+        question:
+          "This area typically refers to the concept of space... What is the area?",
+        answer: "Blank Space",
+      },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 1,
+        question:
+          "American singer-songwriter known for her country and pop music. Born in 1989... Who is she?",
+        answer: "Taylor Swift",
+      },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 2,
+        question: "A male member of a royal family...",
+        answer: "Prince",
+      },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 2,
+        question: "A complex psychological state involving feelings...",
+        answer: "Emotion",
+      },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 2,
+        question: "An Indian actor who made his debut in 'Rocky' in 1981...",
+        answer: "Sanjay Dutt",
+      },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 2,
+        question: "A long-legged freshwater or coastal bird...",
+        answer: "Heron",
+      },
+      {
+        day: "Day 1",
+        round: "Round 1",
+        set: 2,
+        question:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        answer: "Director",
+      },
+    ],
   },
-  
+
   2: {
     name: "Round 2",
     scoreMultiplier: 2,
     questionTime: 15000, // 15 seconds
     startTime: "06 19 * * *",
     questions: [
-      { day: "Day 2", round: "Round 2", set: 1, question: "Round 2 Question 1...", answer: "Answer1" },
-      { day: "Day 2", round: "Round 2", set: 1, question: "Round 2 Question 2...", answer: "Answer2" },
+      {
+        day: "Day 2",
+        round: "Round 2",
+        set: 1,
+        question: "Round 2 Question 1...",
+        answer: "Answer1",
+      },
+      {
+        day: "Day 2",
+        round: "Round 2",
+        set: 1,
+        question: "Round 2 Question 2...",
+        answer: "Answer2",
+      },
       // Add more Round 2 questions
-    ]
+    ],
   },
   3: {
     name: "Round 3",
@@ -64,9 +135,15 @@ const QUIZ_CONFIG = {
     questionTime: 20000, // 20 seconds
     startTime: "35 02 * * *",
     questions: [
-      { day: "Day 3", round: "Round 3", set: 1, question: "Round 3 Question 1...", answer: "Answer1" },
+      {
+        day: "Day 3",
+        round: "Round 3",
+        set: 1,
+        question: "Round 3 Question 1...",
+        answer: "Answer1",
+      },
       // Add more Round 3 questions
-    ]
+    ],
   },
   4: {
     name: "Round 4",
@@ -74,10 +151,16 @@ const QUIZ_CONFIG = {
     questionTime: 25000, // 25 seconds
     startTime: "35 03 * * *",
     questions: [
-      { day: "Day 4", round: "Round 4", set: 1, question: "Round 4 Question 1...", answer: "Answer1" },
+      {
+        day: "Day 4",
+        round: "Round 4",
+        set: 1,
+        question: "Round 4 Question 1...",
+        answer: "Answer1",
+      },
       // Add more Round 4 questions
-    ]
-  }
+    ],
+  },
 };
 
 // Current quiz state
@@ -97,9 +180,11 @@ const startQuiz = (roundNumber) => {
 
   currentRound = roundNumber;
   currentQuestionIndex = 0;
-  
-  console.log(`Starting ${config.name} with ${config.questions.length} questions`);
-  
+
+  console.log(
+    `Starting ${config.name} with ${config.questions.length} questions`
+  );
+
   processNextQuestion(config);
 };
 
@@ -117,17 +202,17 @@ const processNextQuestion = (config) => {
   currentQuestion = {
     ...config.questions[currentQuestionIndex],
     roundNumber: currentRound,
-    roundName: config.name
+    roundName: config.name,
   };
   quizActive = true;
-  
+
   io.emit("question", {
     ...currentQuestion,
     index: currentQuestionIndex,
     totalQuestions: config.questions.length,
     round: currentRound,
     roundName: config.name,
-    scoreMultiplier: config.scoreMultiplier
+    scoreMultiplier: config.scoreMultiplier,
   });
 
   setTimeout(() => {
@@ -152,13 +237,13 @@ io.on("connection", (socket) => {
   socket.on("get-initial", () => {
     if (currentQuestion !== null && quizActive) {
       const config = QUIZ_CONFIG[currentRound];
-      socket.emit("question", { 
-        ...currentQuestion, 
+      socket.emit("question", {
+        ...currentQuestion,
         index: currentQuestionIndex,
         totalQuestions: config.questions.length,
         round: currentRound,
         roundName: config.name,
-        scoreMultiplier: config.scoreMultiplier
+        scoreMultiplier: config.scoreMultiplier,
       });
     }
   });
@@ -172,7 +257,9 @@ io.on("connection", (socket) => {
       }
 
       if (!Array.isArray(answer) || answer.length !== 1) {
-        socket.emit("error", { message: "Answer must be an array with exactly one element" });
+        socket.emit("error", {
+          message: "Answer must be an array with exactly one element",
+        });
         return;
       }
 
@@ -192,7 +279,12 @@ io.on("connection", (socket) => {
       }
 
       function containsWord(sentence, word) {
-        if (!word || !sentence || word.trim() === '' || sentence.trim() === '') {
+        if (
+          !word ||
+          !sentence ||
+          word.trim() === "" ||
+          sentence.trim() === ""
+        ) {
           return false;
         }
         // Convert both to lowercase for case-insensitive comparison
@@ -200,46 +292,52 @@ io.on("connection", (socket) => {
         word = word.toLowerCase();
 
         // Use RegExp to match exact word with word boundaries
-        const regex = new RegExp(`\\b${word}\\b`, 'i');
+        const regex = new RegExp(`\\b${word}\\b`, "i");
         return regex.test(sentence);
       }
 
       // === Handle Round Result First ===
-      let roundRecord = await roundResultModel.findOne({ userId, round: currentRound });
-      
+      let roundRecord = await roundResultModel.findOne({
+        userId,
+        round: currentRound,
+      });
+
       // Get the correct answer and user answer (first element of array)
       let correctAnswer = quiz[questionIndex].answer.toLowerCase().trim();
       let userAnswer = answer[0].toLowerCase().trim();
       const result = containsWord(correctAnswer, userAnswer);
-      
+
       console.log("User Answer:", userAnswer);
       console.log("Correct Answer:", correctAnswer);
       console.log("Answer Check Result:", result);
       console.log("Question Index:", questionIndex);
-      
+
       if (!roundRecord) {
         // Create new round record
         let roundScore = 0;
-        
+
         // Award points if answer is correct
         if (result) {
           roundScore += config.scoreMultiplier;
         }
-        
+
         console.log("Creating new round record with score:", roundScore);
-        
+
         roundRecord = new roundResultModel({
           userId,
           round: currentRound,
           score: roundScore,
-          attemptedQuestions: [questionIndex]
+          attemptedQuestions: [questionIndex],
         });
       } else {
         // Update existing round record
         console.log("Existing round record found");
         console.log("Current score before update:", roundRecord.score);
-        console.log("Current attempted questions:", roundRecord.attemptedQuestions);
-        
+        console.log(
+          "Current attempted questions:",
+          roundRecord.attemptedQuestions
+        );
+
         // Check if question already attempted to prevent duplicates
         if (!roundRecord.attemptedQuestions.includes(questionIndex)) {
           // Award points if answer is correct
@@ -253,42 +351,53 @@ io.on("connection", (socket) => {
           // Don't add additional points for duplicate attempts
         }
       }
-      
+
       await roundRecord.save();
-      
+
       console.log("Final round score:", roundRecord.score);
       console.log("Final attempted questions:", roundRecord.attemptedQuestions);
 
       // === Handle Total Quiz Result ===
       let record = await quizResultModel.findOne({ userId });
-      
+
       if (!record) {
         // Create new total record by calculating from all rounds
         const allRounds = await roundResultModel.find({ userId });
         const totalScore = allRounds.reduce((sum, r) => sum + r.score, 0);
-        const totalAttempted = allRounds.reduce((sum, r) => sum + r.attemptedQuestions.length, 0);
-        
+        const totalAttempted = allRounds.reduce(
+          (sum, r) => sum + r.attemptedQuestions.length,
+          0
+        );
+
         record = new quizResultModel({
           userId,
           totalScore: totalScore,
           totalAttemptedQuestions: totalAttempted,
-          roundsCompleted: [currentRound]
+          roundsCompleted: [currentRound],
         });
       } else {
         // Update total record by recalculating from all rounds
         const allRounds = await roundResultModel.find({ userId });
         record.totalScore = allRounds.reduce((sum, r) => sum + r.score, 0);
-        record.totalAttemptedQuestions = allRounds.reduce((sum, r) => sum + r.attemptedQuestions.length, 0);
-        
+        record.totalAttemptedQuestions = allRounds.reduce(
+          (sum, r) => sum + r.attemptedQuestions.length,
+          0
+        );
+
         // Add current round to completed rounds if not already there
         if (!record.roundsCompleted.includes(currentRound)) {
           record.roundsCompleted.push(currentRound);
         }
       }
-      
+
       await record.save();
 
-      console.log("Sending score update - Total:", record.totalScore, "Round:", roundRecord.score);
+      console.log(
+        "Sending score update - Total:",
+        record.totalScore,
+        "Round:",
+        roundRecord.score
+      );
 
       socket.emit("score-update", {
         totalScore: record.totalScore,
@@ -296,9 +405,8 @@ io.on("connection", (socket) => {
         currentRound: currentRound,
         roundAttempted: roundRecord.attemptedQuestions.length,
         isCorrect: result,
-        correctAnswer: quiz[questionIndex].answer
+        correctAnswer: quiz[questionIndex].answer,
       });
-
     } catch (err) {
       console.error("Score update error:", err);
       socket.emit("error", { message: "Failed to update score" });
@@ -314,20 +422,17 @@ io.on("connection", (socket) => {
   });
 });
 
-const MONGODB_URI ="mongodb+srv://adityashaw970:1VPLFLa5moxyIQpT@cluster0.gxoi6.mongodb.net/nexusDB?retryWrites=true&w=majority&appName=Cluster0";
-
-console.log(process.env.MONGODB_URI);
-
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-  serverSelectionTimeoutMS: 10000, // 10 seconds timeout
-})
-.then(() => console.log("✅ Connected to MongoDB Atlas"))
-.catch(err => console.error("❌ MongoDB connection error:", err));
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+  })
+  .then(() => console.log("✅ Connected to MongoDB Atlas"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-mongoose.set('debug', true);
- 
-app.use(cors({ origin:true, credentials: true }));
+mongoose.set("debug", true);
+
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -341,10 +446,21 @@ app.post("/register", async (req, res) => {
     let salt = await bcrypt.genSalt(10);
     let hashedPassword = await bcrypt.hash(password, salt);
 
-    let user = await userModel.create({ username, email, password: hashedPassword });
-    let token = jwt.sign({ email: user.email, id: user._id, username: user.username }, JWT_SECRET);
+    let user = await userModel.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+    let token = jwt.sign(
+      { email: user.email, id: user._id, username: user.username },
+      JWT_SECRET
+    );
 
-    res.cookie("token", token, { httpOnly: true, sameSite: "none" });
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
     res.send("Registered successfully");
   } catch (err) {
     console.error("Registration error:", err);
@@ -361,8 +477,15 @@ app.post("/login", async (req, res) => {
     let isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).send("Incorrect password");
 
-    let token = jwt.sign({ email: user.email, id: user._id, username: user.username }, JWT_SECRET);
-    res.cookie("token", token, { httpOnly: true, sameSite: "none" });
+    let token = jwt.sign(
+      { email: user.email, id: user._id, username: user.username },
+      JWT_SECRET
+    );
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
     res.status(200).send("Login successful");
   } catch (err) {
     console.error("Login error:", err);
@@ -413,38 +536,37 @@ app.get("/get-user-score/", async (req, res) => {
     if (!token) {
       return res.status(401).json({ message: "Not authenticated" });
     }
-    
+
     const user = jwt.verify(token, JWT_SECRET);
-    
+
     if (requestedRound) {
       // Get specific round data
-      const roundScore = await roundResultModel.findOne({ 
-        userId: user.id, 
-        round: requestedRound 
+      const roundScore = await roundResultModel.findOne({
+        userId: user.id,
+        round: requestedRound,
       });
-      
+
       const config = QUIZ_CONFIG[requestedRound];
-      
+
       res.json({
         round: requestedRound,
         roundName: config?.name || `Round ${requestedRound}`,
         score: roundScore?.score || 0,
         totalQuestions: config?.questions?.length || 0,
         questionAttempt: roundScore?.attemptedQuestions?.length || 0,
-        scoreMultiplier: config?.scoreMultiplier || 1
+        scoreMultiplier: config?.scoreMultiplier || 1,
       });
     } else {
       // Get total data
       const totalRecord = await quizResultModel.findOne({ userId: user.id });
-      
+
       res.json({
         totalScore: totalRecord?.totalScore || 0,
         totalAttempted: totalRecord?.totalAttemptedQuestions || 0,
         roundsCompleted: totalRecord?.roundsCompleted || [],
-        totalRounds: Object.keys(QUIZ_CONFIG).length
+        totalRounds: Object.keys(QUIZ_CONFIG).length,
       });
     }
-
   } catch (err) {
     console.error("Get user score error:", err);
     res.status(500).json({ error: "Failed to fetch score" });
@@ -464,7 +586,7 @@ app.get("/round-results/:round", async (req, res) => {
     res.json({
       round,
       roundName: QUIZ_CONFIG[round]?.name || `Round ${round}`,
-      results
+      results,
     });
   } catch (err) {
     console.error("Round results fetch error:", err);
@@ -486,12 +608,12 @@ app.post("/start-quiz/:round", (req, res) => {
 console.log(process.env.PORT);
 
 // Server Start
-server.listen(process.env.PORT||5000, () => {
+server.listen(process.env.PORT || 5000, () => {
   console.log("Server running on http://localhost:5000");
 });
 
 // Schedule All Rounds
-Object.keys(QUIZ_CONFIG).forEach(roundNumber => {
+Object.keys(QUIZ_CONFIG).forEach((roundNumber) => {
   const config = QUIZ_CONFIG[roundNumber];
   cron.schedule(config.startTime, () => {
     console.log(`Auto-starting ${config.name}`);
