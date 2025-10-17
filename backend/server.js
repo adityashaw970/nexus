@@ -1,4 +1,5 @@
 // ==== server.js ====
+const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
@@ -20,8 +21,10 @@ const io = new Server(server, {
   },
 });
 const helmet = require("helmet");
+const { configDotenv } = require("dotenv");
 app.use(helmet());
 const JWT_SECRET = "shhh";
+dotenv.config();
 
 // Quiz Configuration for All Rounds
 const QUIZ_CONFIG = {
@@ -312,7 +315,7 @@ io.on("connection", (socket) => {
 });
 
 // MongoDB Connection
-mongoose.connect("mongodb://127.0.0.1:27017/nexusverve");
+mongoose.connect(process.env.MONGODB_URI);
 
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
@@ -470,8 +473,10 @@ app.post("/start-quiz/:round", (req, res) => {
   }
 });
 
+console.log(process.env.PORT);
+
 // Server Start
-server.listen(process.env.PORT, () => {
+server.listen(process.env.PORT||5000, () => {
   console.log("Server running on http://localhost:5000");
 });
 
