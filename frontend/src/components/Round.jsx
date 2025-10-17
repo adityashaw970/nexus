@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import Spline from "@splinetool/react-spline";
 
 // Initialize socket connection
-const socket = io("http://localhost:5000", { withCredentials: true });
+const socket = io("http://nexus-3wfr.onrender.com", { withCredentials: true });
 
 const Round = () => {
   const [currentQuestion, setCurrentQuestion] = useState(null);
@@ -27,7 +27,7 @@ const Round = () => {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const res = await fetch("http://localhost:5000/auth/status", {
+        const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
           method: "GET",
           credentials: "include"
         });
@@ -61,7 +61,7 @@ const Round = () => {
   // Fetch current round data from backend
   const fetchCurrentRoundData = async (round) => {
     try {
-      const response = await fetch(`http://localhost:5000/get-user-score?round=${round}`, {
+      const response = await fetch(`http://nexus-3wfr.onrender.com/get-user-score?round=${round}`, {
         method: "GET",
         credentials: "include"
       });
@@ -80,7 +80,7 @@ const Round = () => {
       }
 
       // Also fetch total score across all rounds
-      const totalResponse = await fetch("http://localhost:5000/get-user-score", {
+      const totalResponse = await fetch("http://nexus-3wfr.onrender.com/get-user-score", {
         method: "GET",
         credentials: "include"
       });
@@ -236,7 +236,7 @@ const Round = () => {
     setIsLoading(true);
     try {
       const currentAnswer = userAnswers[currentIndex] || "";
-      const res = await fetch("http://localhost:5000/auth/status", {
+      const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
         credentials: "include",
       });
       const data = await res.json();
@@ -295,7 +295,7 @@ const Round = () => {
       const currentAnswer = userAnswers[currentIndex] || "";
       
       try {
-        const res = await fetch("http://localhost:5000/auth/status", {
+        const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
           credentials: "include",
         });
         const data = await res.json();

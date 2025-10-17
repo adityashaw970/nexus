@@ -4,4 +4,15 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(),tailwindcss()],
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'https://nexus-3wfr.onrender.com',
+  //       changeOrigin: true,
+  //       secure: false,
+  //       rewrite: (path) => path.replace(/^\/api/, '')
+  //     }
+  //   }
+  // }
 })
+// vite.config.js

@@ -12,7 +12,7 @@ const Score = () => {
     const checkAuthAndLoadData = async () => {
       try {
         // Check if user is logged in
-        const res = await fetch("http://localhost:5000/auth/status", {
+        const res = await fetch("http://nexus-3wfr.onrender.com/auth/status", {
           method: "GET",
           credentials: "include"
         });
@@ -51,7 +51,7 @@ const Score = () => {
 
   const fetchRoundData = async (round) => {
     try {
-      const response = await fetch(`http://localhost:5000/get-user-score?round=${round}`, {
+      const response = await fetch(`http://nexus-3wfr.onrender.com/get-user-score?round=${round}`, {
         method: "GET",
         credentials: "include"
       });
@@ -86,7 +86,7 @@ const Score = () => {
 
   const fetchTotalData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/get-user-score", {
+      const response = await fetch("http://nexus-3wfr.onrender.com/get-user-score", {
         method: "GET",
         credentials: "include"
       });
@@ -114,7 +114,7 @@ const Score = () => {
       const allData = {};
 
       for (const round of rounds) {
-        const response = await fetch(`http://localhost:5000/get-user-score?round=${round}`, {
+        const response = await fetch(`http://nexus-3wfr.onrender.com/get-user-score?round=${round}`, {
           method: "GET",
           credentials: "include"
         });

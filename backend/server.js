@@ -16,7 +16,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin:true,
     credentials: true,
   },
 });
@@ -314,12 +314,19 @@ io.on("connection", (socket) => {
   });
 });
 
+const MONGODB_URI ="mongodb+srv://adityashaw970:1VPLFLa5moxyIQpT@cluster0.gxoi6.mongodb.net/nexusDB?retryWrites=true&w=majority&appName=Cluster0";
+
+console.log(process.env.MONGODB_URI);
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, {
+  serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+})
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
+mongoose.set('debug', true);
+ 
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -363,24 +370,12 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/auth/login", (req, res) => {
-  const { email, password } = req.body;
-  const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1d" });
-  res.cookie("token", token, {
-    httpOnly: true,
-    sameSite: "lax", // or "none" if different domains
-    secure: false,
-  });
-  res.json({ message: "logged in" });
-});
-
-// auth status
 app.get("/auth/status", (req, res) => {
-  const token = req.cookies.token;
+  let token = req.cookies.token;
   if (!token) return res.json({ loggedIn: false });
 
   try {
-    const user = jwt.verify(token, JWT_SECRET);
+    let user = jwt.verify(token, JWT_SECRET);
     res.json({ loggedIn: true, user });
   } catch {
     res.json({ loggedIn: false });
@@ -487,6 +482,8 @@ app.post("/start-quiz/:round", (req, res) => {
     res.status(400).json({ error: "Invalid round number" });
   }
 });
+
+console.log(process.env.PORT);
 
 // Server Start
 server.listen(process.env.PORT||5000, () => {
