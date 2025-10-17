@@ -28,6 +28,16 @@ export default function LandingPage() {
       video: "https://player.vimeo.com/progressive_redirect/playback/831162360/rendition/720p/file.mp4?loc=external&signature=fe27313dcd4ea07fd5d87afd5938cd9465575663669ed4506feabf01de752392#t=0.001",
     },
   ];
+   const [Spline, setSpline] = useState(null);
+
+  useEffect(() => {
+    // Load Spline only in browser
+    const loadSpline = async () => {
+      const mod = await import("@splinetool/react-spline");
+      setSpline(() => mod.default);
+    };
+    loadSpline();
+  }, []);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Round] = useState(rounds);
@@ -40,9 +50,9 @@ export default function LandingPage() {
   useEffect(() => {
     const checkStatus = async () => {
       try {
-        const res = await fetch("https://nexus-22i4.onrender.com/auth/status", {
+        const res = await fetch("https://nexus-zg5u.onrender.com/auth/status", {
           method: "GET",
-          credentials: "include"
+          credentials: "include",
         });
         const data = await res.json();
         setIsLoggedIn(data.loggedIn);
