@@ -471,7 +471,7 @@ app.post("/start-quiz/:round", (req, res) => {
 });
 
 // Server Start
-server.listen(5000, () => {
+server.listen(process.env.PORT, () => {
   console.log("Server running on http://localhost:5000");
 });
 
