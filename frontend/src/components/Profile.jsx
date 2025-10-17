@@ -4,24 +4,36 @@ import LandingPage from "./LandingPage.jsx";
 const Profile = () => {
   const [user, setUser] = useState("null");
 
-  useEffect(() => {
+//   useEffect(() => {
+//   const checkLoggedIn = async () => {
+//     const res = await fetch("https://nexus-3wfr.onrender.com/auth/status", {
+//       method: "GET",
+//       credentials: "include" // important for sending cookies
+//     });
+
+//     const msg = await res.json();
+//     if (msg.loggedIn && msg.user?.email) {
+//       setUser(msg.user.email);
+//     }
+//     if (window.location.href === "http://localhost:5173/profile") {
+//       if (!msg.loggedIn || res.status === 404 || !msg.user?.email) {
+//         window.location.href = '/';
+//       }
+//     }
+//   };
+
+//   checkLoggedIn();
+// }, []);
+
+useEffect(() => {
   const checkLoggedIn = async () => {
     const res = await fetch("http://localhost:5000/auth/status", {
-      method: "GET",
-      credentials: "include" // important for sending cookies
+      credentials: "include"
     });
-
     const msg = await res.json();
-    if (msg.loggedIn && msg.user?.email) {
-      setUser(msg.user.email);
-    }
-    if (window.location.href === "http://localhost:5173/profile") {
-      if (!msg.loggedIn || res.status === 404 || !msg.user?.email) {
-        window.location.href = '/';
-      }
-    }
+    if (msg.loggedIn && msg.user?.email) setUser(msg.user.email);
+    else if (window.location.pathname === "/profile") window.location.href = "/";
   };
-
   checkLoggedIn();
 }, []);
 

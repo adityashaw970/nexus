@@ -61,7 +61,7 @@ const Round = () => {
   // Fetch current round data from backend
   const fetchCurrentRoundData = async (round) => {
     try {
-      const response = await fetch(`https://nexus-3wfr.onrender.com/get-user-score?round=${round}`, {
+      const response = await fetch(`http://localhost:5000/get-user-score?round=${round}`, {
         method: "GET",
         credentials: "include"
       });
@@ -80,7 +80,7 @@ const Round = () => {
       }
 
       // Also fetch total score across all rounds
-      const totalResponse = await fetch("https://nexus-3wfr.onrender.com/get-user-score", {
+      const totalResponse = await fetch("http://localhost:5000/get-user-score", {
         method: "GET",
         credentials: "include"
       });
